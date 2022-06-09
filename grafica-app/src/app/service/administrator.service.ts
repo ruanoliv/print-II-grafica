@@ -10,7 +10,7 @@ export const useAdministratorService = () =>{
         const response: AxiosResponse<Administrator> = await httpClient.post<Administrator>(resourceURL, administrator)
         return response.data
     }
-
+    
     return{
         salvar
     }

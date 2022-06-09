@@ -1,14 +1,15 @@
 interface InputProps{
     onChange?: (value: any) => void;
     label: string;
-    placeholder: string;
+    placeholder?: string;
     columnClasses?: string;
     id: string;
     value: string;
-    inputType: string
+    inputType?: string,
+    disabled?: boolean 
 }
 
-export const Input: React.FC<InputProps> = ({onChange, label, placeholder, columnClasses, inputType, id, value}: InputProps) => {
+export const Input: React.FC<InputProps> = ({onChange, label, placeholder, columnClasses, inputType, id, value,disabled}: InputProps) => {
     return(
         <div className={`field column ${columnClasses}`}>
             <label className="label" htmlFor={id}>{label}</label>
@@ -19,7 +20,7 @@ export const Input: React.FC<InputProps> = ({onChange, label, placeholder, colum
                             onChange(event.target.value);
                         }
                     }}
-                    className="input" type={inputType} placeholder={placeholder} />
+                    className="input" type={inputType} placeholder={placeholder} disabled={disabled}/>
             </div>
         </div>
     )

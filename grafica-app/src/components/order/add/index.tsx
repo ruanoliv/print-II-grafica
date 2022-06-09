@@ -7,11 +7,13 @@ import { useOrderService } from '../../../app/service/order.service'
 export const AddOrder = () => {
 
     const service = useOrderService()
-    const[dateDeliver, setDateDeliver] = useState('')
-    const[price, setPrice] = useState('')
-    const[name, setName] = useState('')
-    const[description, setDescription] = useState('')
-    const[type, setType] = useState('')
+    const [dateDeliver, setDateDeliver] = useState('')
+    const [price, setPrice] = useState('')
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [type, setType] = useState('')
+    const [id, setId] = useState<string>('')
+    const [dateOrder, setDateOrder] = useState<string>('')
 
     const ClearFields = () => {
         setDateDeliver('')
@@ -30,12 +32,36 @@ export const AddOrder = () => {
             type
         }
         service
-        .salvar(order)
-        .then(orderResponse => console.log(orderResponse))
+            .salvar(order)
+            .then(orderResponse => {
+                setId(orderResponse.id)
+                setDateOrder(orderResponse.dateOrder)
+                console.log(orderResponse)
+            })
     }
 
     return (
         <Layout title="Cadastrar pedido">
+            {id &&
+                <div className="columns">
+                    <Input
+                        label="Código: "
+                        columnClasses="is-half"
+                        id="inputName"
+                        value={name}
+                        inputType="text"
+                        disabled
+                    />
+                    <Input
+                        label="Data de cadastro: "
+                        columnClasses="is-half"
+                        id="inputPrice"
+                        value={price}
+                        inputType="text"
+                        disabled
+                    />
+                </div>
+            }
             <div className="columns">
                 <Input
                     label="Nome *"
@@ -81,7 +107,7 @@ export const AddOrder = () => {
                     <label className="label" htmlFor="textDescription">Descrição</label>
                     <div className="control">
                         <textarea
-                            id="textDescription" name="description" onChange={e=>{setDescription(e.target.value)}}
+                            id="textDescription" name="description" onChange={e => { setDescription(e.target.value) }}
                             className="textarea" placeholder="Digite a DESCRIÇÃO detalhada do pedido"></textarea>
                     </div>
                 </div>
@@ -92,11 +118,13 @@ export const AddOrder = () => {
                     <button
                         onClick={Submit}
                         className="button is-dark">
-                        Salvar
+                            {
+                                id ? 'Atualizar' : 'Salvar'
+                            }
                     </button>
                 </div>
                 <div className="control">
-                    <button 
+                    <button
                         onClick={ClearFields}
                         className="button is-dark">
                         Limpar campos
