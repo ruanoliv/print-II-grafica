@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 100)
+	@Column(name = "\"user\"", length = 100)
 	private String user;
 	
 	@Column(length = 100)

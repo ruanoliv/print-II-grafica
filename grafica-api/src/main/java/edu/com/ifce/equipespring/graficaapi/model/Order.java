@@ -12,7 +12,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order")
+@Table(name = "\"order\"")
 public class Order {
 	
 	@Id
