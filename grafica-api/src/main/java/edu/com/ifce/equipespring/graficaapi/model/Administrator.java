@@ -1,11 +1,17 @@
 package edu.com.ifce.equipespring.graficaapi.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "administrator")
@@ -20,6 +26,10 @@ public class Administrator {
 	
 	@Column(length = 100)
 	private String password;
+	
+	@Transient
+	@OneToMany(mappedBy="administrator")
+    private List<Order> orders;
 
 	public Administrator() {
 		super();

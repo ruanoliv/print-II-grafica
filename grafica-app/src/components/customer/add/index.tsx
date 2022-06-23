@@ -62,7 +62,7 @@ export const AddCustomer = () => {
                     id="name" 
                     name="name"
                     label="Nome: *"
-                    autoComplete="off" 
+                    autoComplete="off"
                     columnClasses="is-half"
                     onChange={setName} 
                 />

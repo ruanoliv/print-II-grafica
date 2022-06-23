@@ -23,10 +23,11 @@ export const AddOrder = () => {
     const { data: result, error } = useSWR<AxiosResponse<Customer[]>>
                     ('/api/customer', url => httpClient.get(url) )
 
+
     const [ lista, setLista ] = useState<string[]>([])
 
     useEffect( () => {
-        setLista(result?.data.name || [])
+        setLista(result?.data.map((customer: Customer) => customer.name) || [])
     }, [result])
 
     const ClearFields = () => {

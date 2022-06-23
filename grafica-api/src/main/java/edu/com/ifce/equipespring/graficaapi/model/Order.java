@@ -3,14 +3,13 @@ package edu.com.ifce.equipespring.graficaapi.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -22,13 +21,13 @@ public class Order {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne(cascade = CascadeType.ALL) 
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
-	
-	@OneToOne(cascade = CascadeType.ALL) 
-	@JoinColumn(name = "administrator_id")
+	@ManyToOne
+    @JoinColumn(name="administrador_id", nullable=false)
 	private Administrator administrator;
+	
+	@ManyToOne
+    @JoinColumn(name="customer_id", nullable=false)
+	private Customer customer;
 	
 	@Column(length = 255)
 	private String description;

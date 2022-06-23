@@ -1,5 +1,6 @@
 package edu.com.ifce.equipespring.graficaapi.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -9,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -38,6 +41,10 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL) 
 	@JoinColumn(name = "address_id")
     private Address address;
+	
+	@Transient
+	@OneToMany(mappedBy="customer")
+    private List<Order> orders;
 	
 	/**
 	 * 

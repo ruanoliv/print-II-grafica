@@ -38,7 +38,6 @@ public class Address {
 	@Column(length = 50)
 	private String country;
 	
-	
 	@JsonBackReference
 	@OneToOne(mappedBy = "address")
     private Customer customer;
