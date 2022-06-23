@@ -32,7 +32,7 @@ public class Customer {
 	@Column(length = 1)
 	private Character sex;
 	
-	@Column(length = 11)
+	@Column(length = 45)
 	private String cpf;
 	
 	@OneToOne(cascade = CascadeType.ALL) 

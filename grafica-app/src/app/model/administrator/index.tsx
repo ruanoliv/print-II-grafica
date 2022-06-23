@@ -1,7 +1,7 @@
 export interface Administrator{
-    id: number;
-    user: string;
-    password: string;
+    id: number
+    user: string
+    password: string
 }
 
 const administrator: Administrator = {}

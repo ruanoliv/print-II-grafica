@@ -1,7 +1,7 @@
 import { Layout } from '../../layout'
-import { DropdownMenu, Input } from '../../common/input'
+import { DropdownMenu, Input, InputCPF, InputTelefone } from '../../common/input'
 import { useState } from 'react'
-import { Customer, Address, AddressList } from '../../../app/model/customer'
+import { Customer, Address } from '../../../app/model/customer'
 import { useCustomerService } from '../../../app/service/customer.service'
 
 export const AddCustomer = () => {
@@ -45,47 +45,47 @@ export const AddCustomer = () => {
         }
         const customer: Customer = {
             name,
-            phone,
-            cpf,
+            phone: phone.match(/\d/g)?.join("") || "",
+            cpf: cpf.match(/\d/g)?.join("") || "",
             sex: sex.charAt(0),
             address
         }
         service.salvar(customer)
         .then(customerResponse => console.log(customerResponse))
-        .catch(error => console.log('deu erro man'))
+        .catch(error => console.log("deu erro bro"))
     }
 
     return (
         <Layout title="Cadastrar cliente">
             <div className="columns">
                 <Input
-                    label="Nome *"
+                    id="name" 
+                    name="name"
+                    label="Nome: *"
+                    autoComplete="off" 
                     columnClasses="is-half"
-                    onChange={setName}
-                    inputType="text"
-                    placeholder="Digite o nome do cliente"
-                    id="inputName"
-                    value={name}
+                    onChange={setName} 
                 />
-                <Input
-                    label="Telefone *"
+                <InputTelefone
+                    id="phone" 
+                    name="phone"
+                    label="Telefone: *"
+                    autoComplete="off" 
                     columnClasses="is-half"
-                    onChange={setPhone}
-                    inputType="number"
-                    placeholder="Digite o telefone do cliente"
-                    id="inputPhone"
+                    onChange={setPhone} 
                     value={phone}
                 />
             </div>
 
             <div className="columns">
-                <Input
-                    label="CPF *"
-                    onChange={setCPF}
-                    inputType="number"
-                    placeholder="Digite o CPF do cliente"
-                    id="inputCPF"
-                    value={cpf}
+                <InputCPF
+                    id="cpf" 
+                    name="cpf"
+                    label="CPF: *"
+                    autoComplete="off" 
+                    columnClasses="is-half"
+                    onChange={setCPF} 
+                    value={cpf} 
                 />
                 <DropdownMenu
                     onChange={setSex}
@@ -98,42 +98,43 @@ export const AddCustomer = () => {
 
             <div className="columns">
                 <Input
+                    id="street"
+                    name="street"
                     label="Street *"
-                    onChange={setStreet}
-                    placeholder=""
-                    inputType="text"
+                    autoComplete="off" 
                     columnClasses="is-one-third"
-                    id="inputStreet"
+                    onChange={setStreet}              
                     value={street}
                 />
                 <Input
+                    id="number"
+                    name="number"
                     label="Number *"
-                    onChange={setNumber}
-                    placeholder=""
-                    inputType="number"
+                    autoComplete="off"    
                     columnClasses="is-one-third"
-                    id="inputNumber"
+                    onChange={setNumber}               
                     value={number}
+                    inputtype="number"
                 />
                 <Input
+                    id="district"
+                    name="district"
                     label="District *"
-                    inputType="text"
-                    onChange={setDistrict}
-                    placeholder=""
+                    autoComplete="off"    
                     columnClasses="is-one-third"
-                    id="inputDistrict"
+                    onChange={setDistrict}               
                     value={district}
                 />
             </div>
 
             <div className="columns">
                 <Input
+                    id="city"
+                    name="city"
                     label="City *"
-                    onChange={setCity}
-                    placeholder=""
-                    inputType="text"
+                    autoComplete="off"    
                     columnClasses="is-one-third"
-                    id="inputCity"
+                    onChange={setCity}               
                     value={city}
                 />
                <DropdownMenu

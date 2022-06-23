@@ -42,6 +42,26 @@ export const Navbar: React.FC = () => {
                             </a>
                         </div>
                     </div>
+                    <div className="navbar-item has-dropdown is-hoverable">
+                        <a className="navbar-link" href="#">
+                            Pesquisar
+                        </a>
+                        <div className="navbar-dropdown is-boxed">
+                            <Link href="/add/order" passHref>
+                                <a className="navbar-item">
+                                    Pedido
+                                </a>
+                            </Link>
+                            <Link href="/add/customer" passHref>
+                                <a className="navbar-item">
+                                    Cliente
+                                </a>
+                            </Link>
+                            <a className="navbar-item" href="/add/employee">
+                                Funcionário
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="navbar-end">
