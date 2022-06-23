@@ -37,7 +37,6 @@ public class CustomerController {
 		Customer entityCostumer = customer.toModel();
 		Address entityAddress = entityCostumer.getAddress();
 		entityAddress.setCustomer(entityCostumer);
-		addressRepository.save(entityAddress);
 		customerRepository.save(entityCostumer);
 		return CustomerFormRequest.fromModel(entityCostumer);
 	}

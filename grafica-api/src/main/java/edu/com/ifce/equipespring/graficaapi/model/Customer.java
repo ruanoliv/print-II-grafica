@@ -35,8 +35,8 @@ public class Customer {
 	@Column(length = 11)
 	private String cpf;
 	
-	@JsonBackReference
-	@OneToOne(mappedBy = "customer")
+	@OneToOne(cascade = CascadeType.ALL) 
+	@JoinColumn(name = "address_id")
     private Address address;
 	
 	/**

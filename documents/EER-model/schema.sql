@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS "administrator" (
 "password" VARCHAR(255) NOT NULL
 );
 
-
 -- -----------------------------------------------------
 -- Table employee
 -- -----------------------------------------------------
@@ -25,6 +24,19 @@ CREATE TABLE IF NOT EXISTS employee (
   "name" VARCHAR(255) NULL
 );
 
+-- -----------------------------------------------------
+-- Table address
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS "address";
+CREATE TABLE IF NOT EXISTS "address" (
+  "id" SERIAL PRIMARY KEY,
+  "street" VARCHAR(100) NULL,
+  "number" INT NULL,
+  "district" VARCHAR(50) NULL,
+  "city" VARCHAR(100) NULL,
+  "state" VARCHAR(50) NULL,
+  "country" VARCHAR(50) NULL
+);
 
 -- -----------------------------------------------------
 -- Table customer
@@ -35,9 +47,14 @@ CREATE TABLE IF NOT EXISTS "customer" (
   "name" VARCHAR(255) NOT NULL,
   "phone" VARCHAR(11) NULL,
   "cpf" VARCHAR(45) NOT NULL,
-  "sex" CHAR(1) NOT NULL
+  "sex" CHAR(1) NOT NULL,
+  "address_id" INT NOT NULL,
+  CONSTRAINT fk_customer_address1
+    FOREIGN KEY (address_id)
+    REFERENCES "address" ("id")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
-
 
 -- -----------------------------------------------------
 -- Table order
@@ -77,27 +94,6 @@ CREATE TABLE IF NOT EXISTS "alert" (
   CONSTRAINT fk_alert_orders1
     FOREIGN KEY (order_id)
     REFERENCES "order" ("id")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
-
--- -----------------------------------------------------
--- Table address
--- -----------------------------------------------------
-DROP TABLE IF EXISTS address;
-
-CREATE TABLE IF NOT EXISTS address (
-  "id" SERIAL PRIMARY KEY,
-  "street" VARCHAR(100) NULL,
-  "number" INT NULL,
-  "district" VARCHAR(50) NULL,
-  "city" VARCHAR(100) NULL,
-  "state" VARCHAR(50) NULL,
-  "country" VARCHAR(50) NULL,
-  "customer_id" INT NOT NULL,
-  CONSTRAINT fk_address_customer1
-    FOREIGN KEY (customer_id)
-    REFERENCES "customer" ("id")
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
