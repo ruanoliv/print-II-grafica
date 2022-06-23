@@ -1,7 +1,10 @@
 import { Layout } from '../../layout'
-import { Input } from '../../common/input'
-import { useState } from 'react'
+import { Input, DropdownMenu } from '../../common/input'
+import { useState, useEffect } from 'react'
+import useSWR from 'swr'
+import { httpClient } from '../../../app/http'
 import { Order } from '../../../app/model/order'
+import { Customer } from '../../../app/model/customer'
 import { useOrderService } from '../../../app/service/order.service'
 
 export const AddOrder = () => {
@@ -14,6 +17,17 @@ export const AddOrder = () => {
     const [type, setType] = useState('')
     const [id, setId] = useState<string>('')
     const [dateOrder, setDateOrder] = useState<string>('')
+    const [administrator, setAdministrator] = useState('')
+    const [customer, setCustomer] = useState('')
+
+    const { data: result, error } = useSWR<AxiosResponse<Customer[]>>
+                    ('/api/customer', url => httpClient.get(url) )
+
+    const [ lista, setLista ] = useState<string[]>([])
+
+    useEffect( () => {
+        setLista(result?.data.name || [])
+    }, [result])
 
     const ClearFields = () => {
         setDateDeliver('')
@@ -47,39 +61,57 @@ export const AddOrder = () => {
                     <Input
                         label="Código: "
                         columnClasses="is-half"
-                        id="inputName"
+                        id="code"
+                        name="code"
                         value={name}
-                        inputType="text"
                         disabled
                     />
                     <Input
                         label="Data de cadastro: "
                         columnClasses="is-half"
-                        id="inputPrice"
-                        value={price}
-                        inputType="text"
+                        id="price"
+                        name="dateOrder"
+                        value={dateOrder}
                         disabled
                     />
                 </div>
             }
             <div className="columns">
                 <Input
+                    label="Administrador *"
+                    columnClasses="is-half"
+                    onChange={setAdministrator}
+                    placeholder="Administrador logado"
+                    id="administrator"
+                    name="administrator"
+                    value={administrator}
+                />
+                <DropdownMenu
+                    onChange={setCustomer}
+                    label="Cliente *" 
+                    columnClasses="is-one-third"
+                    id="customer"                  
+                    items={lista}
+                />
+            </div>
+            <div className="columns">
+                <Input
                     label="Nome *"
                     columnClasses="is-half"
                     onChange={setName}
                     placeholder="Digite o NOME do pedido"
-                    id="inputName"
+                    id="name"
+                    name="name"
                     value={name}
-                    inputType="text"
                 />
                 <Input
                     label="Preço *"
                     columnClasses="is-half"
                     onChange={setPrice}
                     placeholder="Digite o PREÇO do pedido"
-                    id="inputPrice"
+                    id="price"
+                    name="price"
                     value={price}
-                    inputType="text"
                 />
             </div>
 
@@ -88,17 +120,17 @@ export const AddOrder = () => {
                     label="Tipo *"
                     onChange={setType}
                     placeholder="Digite o TIPO do pedido"
-                    id="inputType"
+                    id="type"
+                    name="type"
                     value={type}
-                    inputType="text"
                 />
                 <Input
                     label="Data de entrega *"
                     onChange={setDateDeliver}
                     placeholder="Digite o DATA DE ENTREGA do pedido"
-                    id="inputDateDeliver"
+                    id="dateDeliver"
+                    name="dateDeliver"
                     value={dateDeliver}
-                    inputType="text"
                 />
             </div>
 

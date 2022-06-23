@@ -3,11 +3,14 @@ package edu.com.ifce.equipespring.graficaapi.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -18,6 +21,14 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
+	
+	@OneToOne(cascade = CascadeType.ALL) 
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+	
+	@OneToOne(cascade = CascadeType.ALL) 
+	@JoinColumn(name = "administrator_id")
+	private Administrator administrator;
 	
 	@Column(length = 255)
 	private String description;
@@ -43,27 +54,33 @@ public class Order {
 		super();
 	}
 	
-	public Order(String description, String name, String dateDeliver, BigDecimal price,
-			String type) {
+	public Order(Customer customer, Administrator administrator, String description, String name, LocalDate dateOrder,
+			String dateDeliver, BigDecimal price, String type) {
 		super();
+		this.customer = customer;
+		this.administrator = administrator;
 		this.description = description;
 		this.name = name;
+		this.dateOrder = dateOrder;
 		this.dateDeliver = dateDeliver;
 		this.price = price;
 		this.type = type;
 	}
 
-	public Order(Long id, String description, String name, String dateDeliver, BigDecimal price,
-			String type) {
+	public Order(Long id, Customer customer, Administrator administrator, String description, String name,
+			LocalDate dateOrder, String dateDeliver, BigDecimal price, String type) {
 		super();
 		this.id = id;
+		this.customer = customer;
+		this.administrator = administrator;
 		this.description = description;
 		this.name = name;
+		this.dateOrder = dateOrder;
 		this.dateDeliver = dateDeliver;
 		this.price = price;
 		this.type = type;
 	}
-	
+
 	@PrePersist
 	public void prePersist() {
 		setDateOrder(LocalDate.now());
@@ -114,6 +131,14 @@ public class Order {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public Administrator getAdministrator() {
+		return administrator;
 	}
 
 	@Override

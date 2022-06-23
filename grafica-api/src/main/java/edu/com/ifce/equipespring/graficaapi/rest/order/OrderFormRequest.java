@@ -36,7 +36,7 @@ public class OrderFormRequest {
 	}
 	
 	public Order toModel() {
-		return new Order(id, description, name, dateDeliver, price, type);
+		return new Order(id, null, null, description, name, dateOrder, dateDeliver, price, type);
 	}
 	
 	public static OrderFormRequest fromModel(Order order) {

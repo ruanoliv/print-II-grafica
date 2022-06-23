@@ -1,6 +1,6 @@
 import { Layout } from '../../layout'
-import { Input } from '../../common/input'
 import { useState } from 'react'
+import { Input } from '../../common/input'
 import { Administrator } from '../../../app/model/administrator'
 import { useAdministratorService } from '../../../app/service/administrator.service'
 
@@ -35,18 +35,19 @@ export const AddAdministrator = () => {
                     columnClasses="is-half"
                     onChange={setUser}
                     placeholder="Digite o seu USUÁRIO"
-                    id="inputUser"
+                    id="user"
+                    name="user"
                     value={user}
-                    inputType="text"
                 />
                 <Input
                     label="Senha *"
                     columnClasses="is-half"
                     onChange={setPassword}
                     placeholder="Digite a sua SENHA"
-                    id="inputPassword"
+                    id="password"
+                    name="password"
                     value={password}
-                    inputType="password"
+                    type="password"
                 />  
             </div>
 

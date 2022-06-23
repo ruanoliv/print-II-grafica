@@ -11,7 +11,32 @@ export const useOrderService = () =>{
         return response.data
     }
 
-    return{
-        salvar
+    const atualizar = async (order: Order) : Promise<void> => {
+        const url: string = `${resourceURL}/${order.id}` 
+        await httpClient.put<Order>(url, order)
+    }
+
+    const carregarProduto = async (id) : Promise<Order> => {
+        const url: string = `${resourceURL}/${id}`
+        const response: AxiosResponse<Order> = await httpClient.get(url);
+        return response.data;
+    }
+
+    const deletar = async (id) : Promise<void> => {
+        const url: string = `${resourceURL}/${id}`
+        await httpClient.delete(url)
+    }
+
+    const listar = async () : Promise<Order[]> => {
+        const response: AxiosResponse<Order[]> = await httpClient.get(resourceURL)
+        return response.data
+    }
+
+    return {
+        salvar,
+        atualizar,
+        carregarProduto,
+        deletar,
+        listar
     }
 }

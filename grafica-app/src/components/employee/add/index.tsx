@@ -36,18 +36,19 @@ export const AddEmployee = () => {
                     columnClasses="is-half"
                     onChange={setUser}
                     placeholder="Digite o seu USUÁRIO"
-                    id="inputUser"
+                    id="user"
+                    name="user"
                     value={user}
-                    inputType="text"
                 />
                 <Input
                     label="Senha *"
                     columnClasses="is-half"
                     onChange={setPassword}
                     placeholder="Digite a sua SENHA"
-                    id="inputPassword"
+                    id="password"
+                    name="password"
                     value={password}
-                    inputType="password"
+                    type="password"
                 />  
             </div>
 
@@ -56,9 +57,9 @@ export const AddEmployee = () => {
                     label="Nome *"
                     onChange={setName}
                     placeholder="Digite o seu NOME"
-                    id="inputName"
+                    id="name"
+                    name="name"
                     value={name}
-                    inputType="text"
                 />
             </div>
 

@@ -12,7 +12,13 @@ export const useCustomerService = () =>{
         return response.data
     }
 
+    const listar = async () : Promise<Customer[]> => {
+        const response: AxiosResponse<Customer[]> = await httpClient.get(resourceURL)
+        return response.data
+    }
+
     return{
-        salvar
+        salvar,
+        listar
     }
 }
