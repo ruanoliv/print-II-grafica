@@ -2,11 +2,10 @@ package edu.com.ifce.equipespring.graficaapi.rest.order;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import edu.com.ifce.equipespring.graficaapi.model.Administrator;
-import edu.com.ifce.equipespring.graficaapi.model.Customer;
 import edu.com.ifce.equipespring.graficaapi.model.Order;
 
 public class OrderFormRequest {
@@ -16,7 +15,7 @@ public class OrderFormRequest {
 	private Long customerId;
 	private String description;
 	private String name;
-	private String dateDeliver;
+	private Date dateDeliver;
 	private BigDecimal price;
 	private String type;
 
@@ -27,7 +26,7 @@ public class OrderFormRequest {
 		super();
 	}
 
-	public OrderFormRequest(Long administratorId, Long customerId, String description, String name, LocalDate dateOrder, String dateDeliver,
+	public OrderFormRequest(Long administratorId, Long customerId, String description, String name, LocalDate dateOrder, Date dateDeliver,
 			BigDecimal price, String type) {
 		super();
 		this.administratorId = administratorId;
@@ -119,11 +118,17 @@ public class OrderFormRequest {
 		this.dateOrder = dateOrder;
 	}
 
-	public String getDateDeliver() {
+	/**
+	 * @return the dateDeliver
+	 */
+	public Date getDateDeliver() {
 		return dateDeliver;
 	}
 
-	public void setDateDeliver(String dateDeliver) {
+	/**
+	 * @param dateDeliver the dateDeliver to set
+	 */
+	public void setdateDeliver(Date dateDeliver) {
 		this.dateDeliver = dateDeliver;
 	}
 

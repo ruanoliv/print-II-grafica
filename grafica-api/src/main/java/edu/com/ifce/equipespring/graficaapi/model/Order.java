@@ -1,17 +1,19 @@
 package edu.com.ifce.equipespring.graficaapi.model;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "\"order\"")
@@ -35,7 +37,7 @@ public class Order {
 	private LocalDate dateOrder;
 	
 	@Column(name = "date_deliver")
-	private String dateDeliver;
+	private Date dateDeliver;
 	
 	@Column(precision = 16, scale = 2)
 	private BigDecimal price;
@@ -43,14 +45,12 @@ public class Order {
 	@Column(length = 100)
 	private String type;
 	
-	
-	
 	public Order() {
 		super();
 	}
 	
 	public Order(Long administratorId, Long customerId, String description, String name, LocalDate dateOrder,
-			String dateDeliver, BigDecimal price, String type) {
+			Date dateDeliver, BigDecimal price, String type) {
 		super();
 		this.customerId = customerId;
 		this.administratorId = administratorId;
@@ -63,7 +63,7 @@ public class Order {
 	}
 
 	public Order(Long id, Long customerId, Long administratorId, String description, String name,
-			LocalDate dateOrder, String dateDeliver, BigDecimal price, String type) {
+			LocalDate dateOrder, Date dateDeliver, BigDecimal price, String type) {
 		super();
 		this.customerId = customerId;
 		this.administratorId = administratorId;
@@ -76,7 +76,15 @@ public class Order {
 	}
 
 	@PrePersist
-	public void prePersist() {
+	public void prePersist() throws ParseException {
+		/*
+		 * 
+		 * 
+		 * SimpleDateFormat formatar = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
+		Date newDate = formatar.parse(dateDeliver);  
+		setDateDeliver(newDate);
+		 */
+		
 		setDateOrder(LocalDate.now());
 	}
 
@@ -106,11 +114,11 @@ public class Order {
 		this.dateOrder = dateOrder;
 	}
 
-	public String getDateDeliver() {
+	public Date getDateDeliver() {
 		return dateDeliver;
 	}
 
-	public void setDateDeliver(String dateDeliver) {
+	public void setDateDeliver(Date dateDeliver) {
 		this.dateDeliver = dateDeliver;
 	}
 

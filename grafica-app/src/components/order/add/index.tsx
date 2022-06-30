@@ -44,10 +44,11 @@ export const AddOrder = () => {
             customerId,
             description,
             name,
-            dateDeliver,
+            dateDeliver: new Date(dateDeliver.toString()),
             price: parseFloat(price),
             type
         }
+        console.log(order)
         service
             .salvar(order)
             .then(orderResponse => {
@@ -132,6 +133,7 @@ export const AddOrder = () => {
                     onChange={setDateDeliver}
                     placeholder="Digite o DATA DE ENTREGA do pedido"
                     id="dateDeliver"
+                    type="date"
                     name="dateDeliver"
                     value={dateDeliver}
                 />

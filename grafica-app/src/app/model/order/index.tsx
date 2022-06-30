@@ -5,7 +5,7 @@ export interface Order{
     id?: string;
     description?: string;
     name?: string;
-    dateDeliver?: string;
+    dateDeliver?: Date;
     dateOrder?: string;
     price?: number;
     type?: string;

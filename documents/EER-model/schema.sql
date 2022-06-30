@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS "order" (
   "administrator_id" INT NOT NULL,
   "description" TEXT NULL,
   "name" VARCHAR(255) NOT NULL,
-  "date_order" TIME NOT NULL,
+  "date_order" DATE NOT NULL,
   "date_deliver" DATE NOT NULL,
   "price" DECIMAL(6) NOT NULL,
   type VARCHAR(45) NOT NULL,
