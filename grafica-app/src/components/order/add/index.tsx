@@ -48,7 +48,6 @@ export const AddOrder = () => {
             price: parseFloat(price),
             type
         }
-        console.log(order)
         service
             .salvar(order)
             .then(orderResponse => {

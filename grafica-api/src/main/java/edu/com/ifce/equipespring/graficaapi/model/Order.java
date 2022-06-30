@@ -77,14 +77,6 @@ public class Order {
 
 	@PrePersist
 	public void prePersist() throws ParseException {
-		/*
-		 * 
-		 * 
-		 * SimpleDateFormat formatar = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-		Date newDate = formatar.parse(dateDeliver);  
-		setDateDeliver(newDate);
-		 */
-		
 		setDateOrder(LocalDate.now());
 	}
 
