@@ -1,5 +1,6 @@
 import { FormatUtils } from '@4us-dev/utils'
 import { InputHTMLAttributes } from 'react';
+import { Customer } from '../../../app/model/customer';
 
 const formatUtils = new FormatUtils();
 
@@ -71,6 +72,38 @@ export const DropdownMenu: React.FC<DropdownProps> = (props: DropdownProps) => {
                         props.onChange(event.target.value);
                     }
                 }}>
+                    {renderItems()}
+                </select>
+            </div>
+        </div>       
+    )
+}
+
+interface DropdownMenuCustomer{
+    onChange?: (value: any) => void
+    label: string
+    columnClasses: string;
+    id: string;
+    customers: Customer[]
+}
+
+export const DropdownMenuCustomer: React.FC<DropdownMenuCustomer> = (props: DropdownMenuCustomer) => {
+    function renderItems(){
+        return props.customers.map((customer: Customer, i) => {
+            console.log(customer)
+            return <option key={i} value={customer.id}>{customer.name}</option>
+        })
+    }
+    return(
+        <div className={`field column ${props.columnClasses}`}>
+            <label className="label" htmlFor={props.id}>{props.label}</label>
+            <div className="select is-primary">
+                <select              
+                    onChange={ event => {
+                        if(props.onChange){
+                            props.onChange(event.target.value);
+                        }
+                    }}>
                     {renderItems()}
                 </select>
             </div>

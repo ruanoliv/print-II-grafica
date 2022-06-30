@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "administrator")
 public class Administrator {
@@ -21,7 +23,7 @@ public class Administrator {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "\"user\"", length = 100)
+	@Column(name = "username", length = 100)
 	private String user;
 	
 	@Column(length = 100)

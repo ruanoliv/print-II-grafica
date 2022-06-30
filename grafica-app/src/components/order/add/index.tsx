@@ -1,5 +1,5 @@
 import { Layout } from '../../layout'
-import { Input, DropdownMenu } from '../../common/input'
+import { Input, DropdownMenu, DropdownMenuCustomer } from '../../common/input'
 import { useState, useEffect } from 'react'
 import useSWR from 'swr'
 import { httpClient } from '../../../app/http'
@@ -17,17 +17,17 @@ export const AddOrder = () => {
     const [type, setType] = useState('')
     const [id, setId] = useState<string>('')
     const [dateOrder, setDateOrder] = useState<string>('')
-    const [administrator, setAdministrator] = useState('')
-    const [customer, setCustomer] = useState('')
+    const [administratorId, setAdministratorId] = useState<number>(0)
+    const [customerId, setCustomerId] = useState<number>(0)
 
     const { data: result, error } = useSWR<AxiosResponse<Customer[]>>
                     ('/api/customer', url => httpClient.get(url) )
 
 
-    const [ lista, setLista ] = useState<string[]>([])
+    const [lista, setLista ] = useState<Customer[]>([])
 
     useEffect( () => {
-        setLista(result?.data.map((customer: Customer) => customer.name) || [])
+        setLista(result?.data.map((customer: Customer) => customer) || [])
     }, [result])
 
     const ClearFields = () => {
@@ -40,6 +40,8 @@ export const AddOrder = () => {
 
     const Submit = () => {
         const order: Order = {
+            administratorId,
+            customerId,
             description,
             name,
             dateDeliver,
@@ -49,8 +51,6 @@ export const AddOrder = () => {
         service
             .salvar(order)
             .then(orderResponse => {
-                setId(orderResponse.id)
-                setDateOrder(orderResponse.dateOrder)
                 console.log(orderResponse)
             })
     }
@@ -65,6 +65,7 @@ export const AddOrder = () => {
                         id="code"
                         name="code"
                         value={name}
+                        onChange={setName}
                         disabled
                     />
                     <Input
@@ -72,6 +73,7 @@ export const AddOrder = () => {
                         columnClasses="is-half"
                         id="price"
                         name="dateOrder"
+                        onChange={setDateOrder}
                         value={dateOrder}
                         disabled
                     />
@@ -81,18 +83,18 @@ export const AddOrder = () => {
                 <Input
                     label="Administrador *"
                     columnClasses="is-half"
-                    onChange={setAdministrator}
+                    onChange={setAdministratorId}
                     placeholder="Administrador logado"
                     id="administrator"
-                    name="administrator"
-                    value={administrator}
+                    name="administratorId"
+                    value={administratorId}
                 />
-                <DropdownMenu
-                    onChange={setCustomer}
+                <DropdownMenuCustomer
+                    onChange={setCustomerId}
                     label="Cliente *" 
                     columnClasses="is-one-third"
-                    id="customer"                  
-                    items={lista}
+                    id="customerId"
+                    customers={lista}
                 />
             </div>
             <div className="columns">

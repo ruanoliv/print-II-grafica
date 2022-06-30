@@ -1,7 +1,5 @@
 package edu.com.ifce.equipespring.graficaapi.rest.customer;
 
-import java.util.List;
-
 import edu.com.ifce.equipespring.graficaapi.model.Address;
 import edu.com.ifce.equipespring.graficaapi.model.Customer;
 
@@ -26,8 +24,9 @@ public class CustomerFormRequest {
 	 * @param cpf
 	 * @param addresses
 	 */
-	public CustomerFormRequest(String name, String phone, char sex, String cpf, Address address) {
+	public CustomerFormRequest(Long id, String name, String phone, char sex, String cpf, Address address) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.sex = sex;
@@ -41,6 +40,7 @@ public class CustomerFormRequest {
 	
 	public static CustomerFormRequest fromModel(Customer customer) {
 		return new CustomerFormRequest(
+				customer.getId(),
 				customer.getName(),
 				customer.getPhone(),
 				customer.getSex(),

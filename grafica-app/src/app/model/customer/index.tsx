@@ -8,6 +8,7 @@ export interface Address {
 }
 
 export interface Customer{
+    id: number
     name: string
     phone: string
     cpf: string

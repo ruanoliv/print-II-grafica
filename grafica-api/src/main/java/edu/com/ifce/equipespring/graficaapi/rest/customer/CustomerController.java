@@ -31,9 +31,6 @@ public class CustomerController {
 	@Autowired
 	private CustomerRepository customerRepository;
 	
-	@Autowired
-	private AddressRepository addressRepository;
-	
 	@GetMapping
 	public List<CustomerFormRequest> getLista(){
 		return customerRepository.findAll().stream()

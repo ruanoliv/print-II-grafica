@@ -43,6 +43,7 @@ public class Customer {
     private Address address;
 	
 	@Transient
+	@JsonBackReference
 	@OneToMany(mappedBy="customer")
     private List<Order> orders;
 	

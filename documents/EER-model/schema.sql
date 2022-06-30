@@ -9,7 +9,7 @@
 DROP TABLE IF EXISTS "administrator";
 CREATE TABLE IF NOT EXISTS "administrator" (
 "id" SERIAL PRIMARY KEY,
-"user" VARCHAR(45) NOT NULL,
+"username" VARCHAR(45) NOT NULL,
 "password" VARCHAR(255) NOT NULL
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS "administrator" (
 DROP TABLE IF EXISTS employee;
 CREATE TABLE IF NOT EXISTS employee (
   "id" SERIAL PRIMARY KEY,
-  "user" VARCHAR(45) NULL,
+  "username" VARCHAR(45) NULL,
   "password" VARCHAR(255) NULL,
   "name" VARCHAR(255) NULL
 );

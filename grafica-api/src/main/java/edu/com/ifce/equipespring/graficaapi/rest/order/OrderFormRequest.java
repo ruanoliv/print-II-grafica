@@ -5,17 +5,21 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import edu.com.ifce.equipespring.graficaapi.model.Administrator;
+import edu.com.ifce.equipespring.graficaapi.model.Customer;
 import edu.com.ifce.equipespring.graficaapi.model.Order;
 
 public class OrderFormRequest {
 	
 	private Long id;
+	private Long administratorId;
+	private Long customerId;
 	private String description;
 	private String name;
 	private String dateDeliver;
 	private BigDecimal price;
 	private String type;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dateOrder;
 
@@ -23,10 +27,11 @@ public class OrderFormRequest {
 		super();
 	}
 
-	public OrderFormRequest(Long id, String description, String name, LocalDate dateOrder, String dateDeliver,
+	public OrderFormRequest(Long administratorId, Long customerId, String description, String name, LocalDate dateOrder, String dateDeliver,
 			BigDecimal price, String type) {
 		super();
-		this.id = id;
+		this.administratorId = administratorId;
+		this.customerId = customerId;
 		this.description = description;
 		this.name = name;
 		this.dateOrder = dateOrder;
@@ -36,12 +41,13 @@ public class OrderFormRequest {
 	}
 	
 	public Order toModel() {
-		return new Order(id, null, null, description, name, dateOrder, dateDeliver, price, type);
+		return new Order(administratorId, customerId, description, name, dateOrder, dateDeliver, price, type);
 	}
 	
 	public static OrderFormRequest fromModel(Order order) {
 		return new OrderFormRequest(
-				order.getId(),
+				order.getAdministratorId(),
+				order.getCustomerId(),
 				order.getDescription(),
 				order.getName(),
 				order.getDateOrder(),
@@ -49,6 +55,36 @@ public class OrderFormRequest {
 				order.getPrice(),
 				order.getType()
 				);
+	}
+
+	
+
+	/**
+	 * @return the administratorId
+	 */
+	public Long getAdministratorId() {
+		return administratorId;
+	}
+
+	/**
+	 * @param administratorId the administratorId to set
+	 */
+	public void setAdministratorId(Long administratorId) {
+		this.administratorId = administratorId;
+	}
+
+	/**
+	 * @return the customerId
+	 */
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * @param customerId the customerId to set
+	 */
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	public Long getId() {

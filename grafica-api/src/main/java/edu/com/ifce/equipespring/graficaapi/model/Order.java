@@ -21,13 +21,9 @@ public class Order {
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-    @JoinColumn(name="administrador_id", nullable=false)
-	private Administrator administrator;
+	private Long administratorId;
 	
-	@ManyToOne
-    @JoinColumn(name="customer_id", nullable=false)
-	private Customer customer;
+	private Long customerId;
 	
 	@Column(length = 255)
 	private String description;
@@ -53,11 +49,11 @@ public class Order {
 		super();
 	}
 	
-	public Order(Customer customer, Administrator administrator, String description, String name, LocalDate dateOrder,
+	public Order(Long administratorId, Long customerId, String description, String name, LocalDate dateOrder,
 			String dateDeliver, BigDecimal price, String type) {
 		super();
-		this.customer = customer;
-		this.administrator = administrator;
+		this.customerId = customerId;
+		this.administratorId = administratorId;
 		this.description = description;
 		this.name = name;
 		this.dateOrder = dateOrder;
@@ -66,12 +62,11 @@ public class Order {
 		this.type = type;
 	}
 
-	public Order(Long id, Customer customer, Administrator administrator, String description, String name,
+	public Order(Long id, Long customerId, Long administratorId, String description, String name,
 			LocalDate dateOrder, String dateDeliver, BigDecimal price, String type) {
 		super();
-		this.id = id;
-		this.customer = customer;
-		this.administrator = administrator;
+		this.customerId = customerId;
+		this.administratorId = administratorId;
 		this.description = description;
 		this.name = name;
 		this.dateOrder = dateOrder;
@@ -131,13 +126,35 @@ public class Order {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	
 
-	public Customer getCustomer() {
-		return customer;
+	/**
+	 * @return the administratorId
+	 */
+	public Long getAdministratorId() {
+		return administratorId;
 	}
 
-	public Administrator getAdministrator() {
-		return administrator;
+	/**
+	 * @param administratorId the administratorId to set
+	 */
+	public void setAdministratorId(Long administratorId) {
+		this.administratorId = administratorId;
+	}
+
+	/**
+	 * @return the customerId
+	 */
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * @param customerId the customerId to set
+	 */
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	@Override
